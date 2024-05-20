@@ -1,6 +1,13 @@
 #include <TFT_eSPI.h>
 #include <TimeLib.h>
 #include "Position.h"
+#include <Arduino.h>
+
+#include <WiFi.h>
+#include <WiFiMulti.h>
+#include <WiFiClientSecure.h>
+
+#include <WebSocketsClient.h>
 
 #define TFT_GRAY tft.color565(128, 128, 128)
 TFT_eSPI tft = TFT_eSPI();
@@ -12,6 +19,9 @@ volatile int counter = 0;
 // Function prototypes
 void buttonInterrupt1();
 void buttonInterrupt2();
+
+extern void web_setup(); // Declare web_setup() function from WebSocketClient.ino
+extern void web_loop();  // Declare web_loop() function from WebSocketClient.ino
 
 void setup(void)
 {
@@ -59,9 +69,11 @@ void loop()
   while (counter == 1)
   {
 
-    imusetup();
-    delay(300);
-    imuloop();
+    // imusetup();
+    // delay(300);
+    // imuloop();
+    web_setup();
+    web_loop();
   }
 }
 
@@ -74,4 +86,5 @@ void buttonInterrupt1()
 void buttonInterrupt2()
 {
   Serial.println("Button 2 pressed");
+  counter = 0;
 }
