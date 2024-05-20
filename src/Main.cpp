@@ -16,6 +16,7 @@ TFT_eSPI tft = TFT_eSPI();
 #define BUTTON_PIN_2 33
 volatile int counter = 0;
 
+
 // Function prototypes
 void buttonInterrupt1();
 void buttonInterrupt2();
@@ -69,11 +70,11 @@ void loop()
   while (counter == 1)
   {
 
-    // imusetup();
-    // delay(300);
-    // imuloop();
-    web_setup();
-    web_loop();
+    imusetup();
+    delay(300);
+    imuloop();
+    // web_setup();
+    // web_loop();
   }
 }
 

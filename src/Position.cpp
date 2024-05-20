@@ -6,7 +6,7 @@
 
 double xPos = 0, yPos = 0, headingVel = 0;
 uint16_t BNO055_SAMPLERATE_DELAY_MS = 10; // how often to read data from the board
-uint16_t PRINT_DELAY_MS = 500;            // how often to print the data
+uint16_t PRINT_DELAY_MS = 50;             // how often to print the data
 uint16_t printCount = 0;                  // counter to avoid printing every 10MS sample
 
 // velocity = accel*dt (dt in seconds)
@@ -50,6 +50,12 @@ void imuloop(void)
   // velocity of sensor in the direction it's facing
   headingVel = ACCEL_VEL_TRANSITION * linearAccelData.acceleration.x / cos(DEG_2_RAD * orientationData.orientation.x);
 
+  Serial.println("in imuloop right before printing");
+  Serial.print("printcount val: ");
+  Serial.println(printCount);
+  Serial.print("print_delay_ms");
+  Serial.println(PRINT_DELAY_MS);
+
   if (printCount * BNO055_SAMPLERATE_DELAY_MS >= PRINT_DELAY_MS)
   {
     // enough iterations have passed that we can print the latest data
@@ -65,9 +71,9 @@ void imuloop(void)
   }
   else
   {
+
     printCount = printCount + 1;
   }
-
   while ((micros() - tStart) < (BNO055_SAMPLERATE_DELAY_MS * 1000))
   {
     // poll until the next sample is ready
