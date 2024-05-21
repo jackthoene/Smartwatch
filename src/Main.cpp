@@ -16,13 +16,12 @@ TFT_eSPI tft = TFT_eSPI();
 #define BUTTON_PIN_2 33
 volatile int counter = 0;
 
-
 // Function prototypes
 void buttonInterrupt1();
 void buttonInterrupt2();
 
-extern void web_setup(); // Declare web_setup() function from WebSocketClient.ino
-extern void web_loop();  // Declare web_loop() function from WebSocketClient.ino
+extern void websetup(); // Declare web_setup() function from WebSocketClient.ino
+extern void webloop();  // Declare web_loop() function from WebSocketClient.ino
 
 void setup(void)
 {
@@ -70,11 +69,11 @@ void loop()
   while (counter == 1)
   {
 
-    imusetup();
-    delay(300);
-    imuloop();
-    // web_setup();
-    // web_loop();
+    // imusetup();
+    // delay(300);
+    // imuloop();
+    websetup();
+    webloop();
   }
 }
 
