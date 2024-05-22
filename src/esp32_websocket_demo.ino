@@ -1,5 +1,6 @@
 #include <WiFi.h>
 #include <WebSocketsClient.h>
+#include "Position.h"
 
 // const char* ssid = "Device-Northwestern"; // Make sure to register with device northwestern prior to using this
 
@@ -52,7 +53,20 @@ void webloop()
     String message = "Hello other side!";
     websockets_client.sendTXT(message);
     websockets_client.loop();
-    delay(100);
+    delay(10);
+
+    /////////////////// sending imu data as json /////////////////////
+
+    float *sensorData = readSensorData();
+    float yaw = sensorData[0];
+    float pitch = sensorData[1];
+    float roll = sensorData[2];
+
+    String jsonData = serializeSensorData(yaw, pitch, roll);
+
+    websockets_client.sendTXT(jsonData);
+
+    //////////////////////////////////////////////////////////////////
 }
 
 void websockets_event(WStype_t type, uint8_t *payload, size_t length)

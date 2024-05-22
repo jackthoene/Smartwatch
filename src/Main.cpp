@@ -38,6 +38,8 @@ void setup(void)
 
   attachInterrupt(digitalPinToInterrupt(BUTTON_PIN_1), buttonInterrupt1, FALLING);
   attachInterrupt(digitalPinToInterrupt(BUTTON_PIN_2), buttonInterrupt2, FALLING);
+
+  websetup();
 }
 
 void loop()
@@ -66,13 +68,13 @@ void loop()
     delay(1000);
   }
 
-  while (counter == 1)
+  if (counter == 1)
   {
 
     // imusetup();
     // delay(300);
     // imuloop();
-    websetup();
+
     webloop();
   }
 }

@@ -3,6 +3,7 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
+#include <ArduinoJson.h>
 
 double xPos = 0, yPos = 0, headingVel = 0;
 uint16_t BNO055_SAMPLERATE_DELAY_MS = 10; // how often to read data from the board
@@ -14,6 +15,8 @@ uint16_t printCount = 0;                  // counter to avoid printing every 10M
 double ACCEL_VEL_TRANSITION = (double)(BNO055_SAMPLERATE_DELAY_MS) / 1000.0;
 double ACCEL_POS_TRANSITION = 0.5 * ACCEL_VEL_TRANSITION * ACCEL_VEL_TRANSITION;
 double DEG_2_RAD = 0.01745329251; // trig functions require radians, BNO055 outputs degrees
+
+sensors_event_t orientationData, linearAccelData;
 
 // Check I2C device address and correct line below (by default address is 0x29 or 0x28)
 //                                   id, address
@@ -116,4 +119,35 @@ void printEvent(sensors_event_t *event)
   Serial.print(y);
   Serial.print(" | z= ");
   Serial.println(z);
+}
+
+float *readSensorData()
+{
+  sensors_event_t orientationData, linearAccelData;
+  static float sensorData[3];
+
+  sensorData[0] = orientationData.orientation.x;
+  sensorData[1] = orientationData.orientation.y;
+  sensorData[2] = orientationData.orientation.z;
+
+  return sensorData;
+}
+
+String serializeSensorData(float yawX, float pitchY, float rollZ)
+{
+  // new sending imu data as json to ws ///////////////////////
+
+  StaticJsonDocument<200> imudata;
+  imudata["x_data"] = yawX;
+  imudata["y_data"] = pitchY;
+  imudata["z_data"] = rollZ;
+
+  // Serialize json obj to str
+  String jsonString;
+  serializeJson(imudata, jsonString);
+
+  // send json data over websocket
+  return jsonString;
+
+  ///////////////////////////////////////////////////////////////
 }

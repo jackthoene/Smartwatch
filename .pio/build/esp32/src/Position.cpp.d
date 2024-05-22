@@ -135,4 +135,7 @@
  C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/Wire/src/Wire.h \
  C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/cores/esp32/esp32-hal.h \
  .pio/libdeps/esp32/Adafruit\ Unified\ Sensor/Adafruit_Sensor.h \
- C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/cores/esp32/Print.h
+ C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/cores/esp32/Print.h \
+ .pio/libdeps/esp32/ArduinoJson/src/ArduinoJson.h \
+ .pio/libdeps/esp32/ArduinoJson/src/ArduinoJson.hpp \
+ .pio/libdeps/esp32/ArduinoJson/src/ArduinoJson/Configuration.hpp

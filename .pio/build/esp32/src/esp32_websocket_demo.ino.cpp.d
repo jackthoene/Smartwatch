@@ -227,4 +227,14 @@
  C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/tools/sdk/esp32/include/mbedtls/port/include/aes_alt.h \
  C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/tools/sdk/esp32/include/mbedtls/port/include/aes/esp_aes.h \
  C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/tools/sdk/esp32/include/hal/include/hal/aes_types.h \
- C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/tools/sdk/esp32/include/mbedtls/mbedtls/include/mbedtls/error.h
+ C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/tools/sdk/esp32/include/mbedtls/mbedtls/include/mbedtls/error.h \
+ src/Position.h \
+ C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/Wire/src/Wire.h \
+ C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/cores/esp32/esp32-hal.h \
+ .pio/libdeps/esp32/Adafruit\ BNO055/Adafruit_BNO055.h \
+ .pio/libdeps/esp32/Adafruit\ BNO055/utility/imumaths.h \
+ .pio/libdeps/esp32/Adafruit\ BNO055/utility/matrix.h \
+ .pio/libdeps/esp32/Adafruit\ BNO055/utility/vector.h \
+ .pio/libdeps/esp32/Adafruit\ BNO055/utility/quaternion.h \
+ .pio/libdeps/esp32/Adafruit\ BusIO/Adafruit_I2CDevice.h \
+ .pio/libdeps/esp32/Adafruit\ Unified\ Sensor/Adafruit_Sensor.h

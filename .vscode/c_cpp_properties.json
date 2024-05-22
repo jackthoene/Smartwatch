@@ -10,6 +10,7 @@
             "includePath": [
                 "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/include",
                 "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/src",
+                "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/.pio/libdeps/esp32/ArduinoJson/src",
                 "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/.pio/libdeps/esp32/WebSockets/src",
                 "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/WiFiClientSecure/src",
                 "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/Ethernet/src",
@@ -203,6 +204,7 @@
                 "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/tools/sdk/esp32/qspi_qspi/include",
                 "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/cores/esp32",
                 "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/variants/doitESP32devkitV1",
+                "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/.pio/libdeps/esp32/Unity/src",
                 "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/ArduinoOTA/src",
                 "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/AsyncUDP/src",
                 "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/BLE/src",
@@ -234,6 +236,7 @@
                 "path": [
                     "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/include",
                     "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/src",
+                    "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/.pio/libdeps/esp32/ArduinoJson/src",
                     "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/.pio/libdeps/esp32/WebSockets/src",
                     "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/WiFiClientSecure/src",
                     "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/Ethernet/src",
@@ -427,6 +430,7 @@
                     "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/tools/sdk/esp32/qspi_qspi/include",
                     "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/cores/esp32",
                     "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/variants/doitESP32devkitV1",
+                    "C:/Users/Windows/Documents/GitHub/EE327/Another_Project_Walkthru/.pio/libdeps/esp32/Unity/src",
                     "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/ArduinoOTA/src",
                     "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/AsyncUDP/src",
                     "C:/Users/Windows/.platformio/packages/framework-arduinoespressif32@3.20003.220626/libraries/BLE/src",

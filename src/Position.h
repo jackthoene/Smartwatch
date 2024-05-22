@@ -10,6 +10,8 @@
 void imusetup();
 void imuloop();
 void printEvent(sensors_event_t *event);
+float *readSensorData();
+String serializeSensorData(float yawX, float pitchY, float rollZ);
 
 // Constants
 extern double xPos;
