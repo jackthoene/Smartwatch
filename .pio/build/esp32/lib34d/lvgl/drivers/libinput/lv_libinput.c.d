@@ -1,0 +1,22 @@
+.pio/build/esp32/lib34d/lvgl/drivers/libinput/lv_libinput.c.o: \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/lv_libinput.c \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/lv_libinput.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/lv_indev.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../core/lv_group.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../core/../lv_conf_internal.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../core/../lv_conf_kconfig.h \
+ C:/Users/Windows/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/dio_qspi/include/sdkconfig.h \
+ C:/Users/Windows/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include/esp_attr.h \
+ c:\users\windows\documents\github\smartwatch\.pio\libdeps\esp32\lv_conf.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../core/../misc/lv_types.h \
+ c:\users\windows\documents\github\smartwatch\.pio\libdeps\esp32\lvgl\src\lv_conf_internal.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../core/../misc/lv_ll.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../misc/lv_area.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../misc/../lv_conf_internal.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../misc/lv_types.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../misc/lv_timer.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../misc/../tick/lv_tick.h \
+ c:\users\windows\documents\github\smartwatch\.pio\libdeps\esp32\lvgl\src\lv_conf_internal.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../misc/lv_ll.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../misc/lv_event.h \
+ .pio/libdeps/esp32/lvgl/src/drivers/libinput/../../indev/../misc/lv_array.h
