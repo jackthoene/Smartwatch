@@ -76,7 +76,7 @@ void setup()
   // Create tasks
   xTaskCreate(screenTask, "Screen Task", 2048, NULL, 1, &screenTaskHandle);
   xTaskCreate(imuTask, "IMU Task", 2048, NULL, 1, &imuTaskHandle);
-  xTaskCreate(camTask, "Camera Task", 2048, NULL, 1, &camTaskHandle);
+  xTaskCreate(camTask, "Camera Task", 4096, NULL, 1, &camTaskHandle);
   xTaskCreate(webTask, "Web Task", 2048, NULL, 1, &webTaskHandle);
 }
 
@@ -93,9 +93,11 @@ void IRAM_ATTR buttonInterrupt1()
   {
     button1Pressed = true;
     lastButton1PressTime = currentTime;
+    Serial.println("Button 1 pressed");
+    counter = 1;
   }
-  Serial.println("Button 1 pressed");
-  counter = 1;
+  // Serial.println("Button 1 pressed");
+  // counter = 1;
 }
 
 // Interrupt service routine for Button 2
@@ -107,8 +109,9 @@ void IRAM_ATTR buttonInterrupt2()
     button2Pressed = true;
     lastButton2PressTime = currentTime;
     Serial.println("Button 2 pressed");
+    counter = 0;
   }
-  counter = 0;
+  // counter = 0;
 }
 
 void screenTask(void *parameter)
@@ -163,6 +166,9 @@ void webTask(void *parameter)
   {
     if (counter == 3)
     {
+      // Serial.println("Go to websetup");
+      // websetup();
+      Serial.println("websetup done, go to webloop");
       webloop();
       vTaskDelay(100 / portTICK_PERIOD_MS); // Delay to allow other tasks to run
     }

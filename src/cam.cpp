@@ -2,7 +2,8 @@
 #include "esp_timer.h"
 #include "img_converters.h"
 #include "Arduino.h"
-#include "WiFi.h"
+#include "FS.h"
+#include "SPIFFS.h"
 
 // Camera configuration parameters
 #define PWDN_GPIO_NUM -1
@@ -25,6 +26,13 @@
 
 void camsetup()
 {
+    // Initialize SPIFFS
+    if (!SPIFFS.begin(true))
+    {
+        Serial.println("An Error has occurred while mounting SPIFFS");
+        return;
+    }
+
     camera_config_t config;
     config.ledc_channel = LEDC_CHANNEL_0;
     config.ledc_timer = LEDC_TIMER_0;
@@ -64,10 +72,7 @@ void camsetup()
     Serial.println("Camera initialized");
 
     // Take a picture
-    camera_fb_t *fb = NULL;
-
-    // Take Picture with Camera
-    fb = esp_camera_fb_get();
+    camera_fb_t *fb = esp_camera_fb_get();
     if (!fb)
     {
         Serial.println("Camera capture failed");
@@ -76,7 +81,17 @@ void camsetup()
 
     Serial.printf("Picture taken! Its size was: %zu bytes\n", fb->len);
 
-    // Use the picture data...
+    // Save the picture to SPIFFS
+    File file = SPIFFS.open("/image.jpg", FILE_WRITE);
+    if (!file)
+    {
+        Serial.println("Failed to open file for writing");
+        return;
+    }
+    file.write(fb->buf, fb->len);
+    file.close();
+
+    Serial.println("Picture saved to /image.jpg");
 
     // Return the frame buffer back to the driver for reuse
     esp_camera_fb_return(fb);
@@ -86,3 +101,14 @@ void camloop()
 {
     // Put your main code here, to run repeatedly:
 }
+
+// Make sure your client sends the appropriate messages and data in the expected format.
+// For example:
+
+// websocket.send('IMAGE_START');
+// websocket.send(JSON.stringify({ type: 'image', data: imageDataInBase64 }));
+// websocket.send('IMAGE_END');
+
+// websocket.send('IMU_START');
+// websocket.send(JSON.stringify({ type: 'imu', x: 0.1, y: 0.3, z: 0.9 }));
+// websocket.send('IMU_END');

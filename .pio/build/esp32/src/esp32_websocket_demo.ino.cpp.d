@@ -243,4 +243,10 @@
  .pio/libdeps/esp32/Adafruit\ BNO055/utility/vector.h \
  .pio/libdeps/esp32/Adafruit\ BNO055/utility/quaternion.h \
  .pio/libdeps/esp32/Adafruit\ BusIO/Adafruit_I2CDevice.h \
- .pio/libdeps/esp32/Adafruit\ Unified\ Sensor/Adafruit_Sensor.h
+ .pio/libdeps/esp32/Adafruit\ Unified\ Sensor/Adafruit_Sensor.h \
+ .pio/libdeps/esp32/ArduinoJson/src/ArduinoJson.h \
+ .pio/libdeps/esp32/ArduinoJson/src/ArduinoJson.hpp \
+ .pio/libdeps/esp32/ArduinoJson/src/ArduinoJson/Configuration.hpp \
+ C:/Users/Windows/.platformio/packages/framework-arduinoespressif32/libraries/FS/src/FS.h \
+ C:/Users/Windows/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src/SPIFFS.h \
+ C:/Users/Windows/.platformio/packages/framework-arduinoespressif32/cores/esp32/base64.h

@@ -1,6 +1,10 @@
 #include <WiFi.h>
 #include <WebSocketsClient.h>
 #include "Position.h"
+#include <ArduinoJson.h>
+#include <FS.h>
+#include <SPIFFS.h>
+#include <base64.h>
 
 // const char* ssid = "Device-Northwestern"; // Make sure to register with device northwestern prior to using this
 
@@ -13,9 +17,15 @@ const char *eap_password = "paint278"; // replace with your password
 WebSocketsClient websockets_client;
 // int adc_pin = 32; // replace with the ADC pin you're using
 
+void websockets_event(WStype_t type, uint8_t *payload, size_t length);
+void sendImage(const char *imagePath);
+void websetup();
+void webloop();
+
 void websetup()
 {
     Serial.begin(115200);
+    SPIFFS.begin();
     Serial.println(WiFi.macAddress()); // displays MAC address to register with device northwestern, if desired
 
     // Connect to WiFi
@@ -41,32 +51,36 @@ void websetup()
     Serial.println(WiFi.localIP());
 
     // websockets_client.begin("localhost", 8080); // replace with your server's info
-    websockets_client.begin("192.168.107.28", 8080); // replace with your server's info
+    // websockets_client.begin("192.168.107.28", 8080); // replace with your server's info
+    websockets_client.begin("192.168.56.1", 8080); // replace with your server's info
     // websockets_client.begin("34.218.247.252", 8888, "/websocket_esp32"); // replace with your server's info
     websockets_client.onEvent(websockets_event);
 }
 
 void webloop()
 {
-    // float adc_value = analogRead(adc_pin);
-    // float voltage = adc_value * (3.3 / 4096.0);
-    String message = "Hello other side!";
-    websockets_client.sendTXT(message);
-    websockets_client.loop();
-    delay(10);
-
-    /////////////////// sending imu data as json /////////////////////
-
+    Serial.print("1");
+    // Sending IMU data as JSON
     float *sensorData = readSensorData();
     float yaw = sensorData[0];
     float pitch = sensorData[1];
     float roll = sensorData[2];
-
-    String jsonData = serializeSensorData(yaw, pitch, roll);
-
+    Serial.print("2");
+    StaticJsonDocument<1024> doc;
+    doc["type"] = "imu";
+    doc["yaw"] = yaw;
+    doc["pitch"] = pitch;
+    doc["roll"] = roll;
+    Serial.print("3");
+    String jsonData;
+    serializeJson(doc, jsonData);
     websockets_client.sendTXT(jsonData);
-
-    //////////////////////////////////////////////////////////////////
+    Serial.print("4");
+    // Sending the image
+    sendImage("/image.jpg");
+    Serial.print("5");
+    websockets_client.loop();
+    delay(1000);
 }
 
 void websockets_event(WStype_t type, uint8_t *payload, size_t length)
@@ -83,4 +97,40 @@ void websockets_event(WStype_t type, uint8_t *payload, size_t length)
         Serial.println("Received message from WebSocket server: " + String((char *)payload));
         break;
     }
+}
+
+void sendImage(const char *imagePath)
+{
+    if (!SPIFFS.exists(imagePath))
+    {
+        Serial.println("Image file not found");
+        return;
+    }
+
+    File imageFile = SPIFFS.open(imagePath, "r");
+    if (!imageFile)
+    {
+        Serial.println("Failed to open image file");
+        return;
+    }
+
+    websockets_client.sendTXT("IMAGE_START");
+
+    while (imageFile.available())
+    {
+        uint8_t buffer[512];
+        size_t bytesRead = imageFile.read(buffer, sizeof(buffer));
+        String data = base64::encode(buffer, bytesRead);
+
+        StaticJsonDocument<1024> doc;
+        doc["type"] = "image";
+        doc["data"] = data;
+
+        String jsonData;
+        serializeJson(doc, jsonData);
+        websockets_client.sendTXT(jsonData);
+    }
+
+    websockets_client.sendTXT("IMAGE_END");
+    imageFile.close();
 }
