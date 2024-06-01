@@ -6,43 +6,43 @@ const server = new WebSocket.Server({ port: 8080 });
 
 server.on('connection', socket => {
     console.log('A new client connected!');
-
-    let imageData = [];
-    let imuData = {};
-
+    
     socket.on('message', message => {
-        if (message === 'IMAGE_START') {
-            imageData = [];
-            console.log('Started receiving image data');
-        } else if (message === 'IMAGE_END') {
-            console.log('Finished receiving image data');
-            fs.writeFileSync('image.jpg', Buffer.concat(imageData));
-            exec('python Face_recognition.py', (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`Error executing Face_recognition.py: ${error}`);
-                    return;
-                }
-                console.log(`Face_recognition.py output: ${stdout}`);
-            });
-        } else if (message === 'IMU_START') {
-            imuData = { x: [], y: [], z: [] };
-            console.log('Started receiving IMU data');
-        } else if (message === 'IMU_END') {
-            console.log('Finished receiving IMU data');
-            fs.writeFileSync('imu_data.json', JSON.stringify(imuData, null, 2));
-        } else {
+        console.log('Message type:', typeof message);
+        
+        if (typeof message === 'object') {
             try {
                 const data = JSON.parse(message);
-                if (data.type === 'image') {
-                    imageData.push(Buffer.from(data.data, 'base64'));
-                } else if (data.type === 'imu') {
-                    imuData.x.push(data.x);
-                    imuData.y.push(data.y);
-                    imuData.z.push(data.z);
+                console.log('Data Type:', data.type);
+                
+                if (data.type === 'IMU') {
+                    console.log('Received IMU data:', data);
+                    fs.writeFileSync('imu_data.json', JSON.stringify(data, null, 2));
+                } else {
+                    console.error('Unknown JSON message type');
                 }
             } catch (error) {
-                console.error(`Error parsing message: ${error}`);
+                console.error(`Error parsing message as JSON: ${error}`);
             }
+        } else {
+            // Assuming that binary messages are image data
+            console.log('Received binary image data');
+            
+            // Save the received data to a file
+            fs.writeFile('image.jpg', message, err => {
+                if (err) {
+                    console.error('Error saving image:', err);
+                } else {
+                    console.log('Image saved as image.jpg');
+                    exec('python Face_recognition.py', (error, stdout, stderr) => {
+                        if (error) {
+                            console.error(`Error executing Face_recognition.py: ${error}`);
+                            return;
+                        }
+                        console.log(`Face_recognition.py output: ${stdout}`);
+                    });
+                }
+            });
         }
     });
 
