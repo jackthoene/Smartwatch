@@ -8,7 +8,7 @@ face_cascade = cv2.CascadeClassifier(
 )
 
 # Load the image
-image_path = "image2.jpg"
+image_path = "image.jpg"
 image = cv2.imread(image_path)
 
 if image is not None:
