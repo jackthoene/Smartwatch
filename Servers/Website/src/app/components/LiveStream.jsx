@@ -7,7 +7,7 @@ const LiveStream = () => {
 
   useEffect(() => {
     const fetchAnimationFrame = () => {
-      fetch("http://192.168.57.28:5000/animation")
+      fetch("http://192.168.22.92:5000/animation")
         .then((response) => response.blob())
         .then((blob) => {
           setImageSrc(URL.createObjectURL(blob));

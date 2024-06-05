@@ -36,6 +36,24 @@ server.on('connection', (ws) => {
 
 console.log('WebSocket server is listening on port 8081');
 
+// Function to send IMU data
+function sendImuData() {
+  // Generate random IMU data
+  const imuData = {
+    type: 'IMU',
+    x: (Math.random() * 10).toFixed(2),
+    y: (Math.random() * 10).toFixed(2),
+    z: (Math.random() * 10).toFixed(2)
+  };
+
+  // Send the IMU data in JSON format
+  client.send(JSON.stringify(imuData));
+  console.log('IMU data sent to the target server:', imuData);
+}
+
+// Send IMU data every 0.5 seconds
+setInterval(sendImuData, 500);
+
 // Set up readline to listen for user input from the terminal
 const rl = readline.createInterface({
   input: process.stdin,
@@ -62,17 +80,7 @@ rl.on('line', (input) => {
       });
     });
   } else if (input === 'send imu') {
-    // Generate random IMU data
-    const imuData = {
-      type: 'IMU',
-      x: (Math.random() * 10).toFixed(2),
-      y: (Math.random() * 10).toFixed(2),
-      z: (Math.random() * 10).toFixed(2)
-    };
-
-    // Send the IMU data in JSON format
-    client.send(JSON.stringify(imuData));
-    console.log('IMU data sent to the target server:', imuData);
+    sendImuData();
   } else {
     console.log('Unknown command');
   }

@@ -63,9 +63,9 @@ def create_pyramid_frame(imu_data, frame):
     ax.set_ylim(-1, 1)
     ax.set_zlim(0, 1)
 
-    pitch = imu_data["x"][frame]
-    yaw = imu_data["y"][frame]
-    roll = imu_data["z"][frame]
+    pitch = float(imu_data["x"][frame])
+    yaw = float(imu_data["y"][frame])
+    roll = float(imu_data["z"][frame])
 
     rotated_faces = []
     for face in faces:
